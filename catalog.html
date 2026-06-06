@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог саджанців — Berry-Farm</title>
+<meta name="description" content="Каталог саджанців Berry-Farm: лохина, полуниця, малина, ожина, смородина, гортензія, фундук. Купити з доставкою по Україні.">
+<link rel="icon" href="../public/favicon/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<style>
+:root{--bp:#660ff1;--bd:#2f0277;--bg:#81c408;--bi:#3d0582}
+*{box-sizing:border-box}body{font-family:'Open Sans',sans-serif;color:#333;overflow-x:hidden}
+#spinner{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s}
+#spinner.hidden{opacity:0;pointer-events:none}
+.topbar{background:var(--bi);padding:8px 0;border-radius:0 0 20px 20px}
+.topbar a{color:#fff;text-decoration:none;font-size:.85rem}.topbar a:hover{color:var(--bg)}.topbar i{color:var(--bg)}
+.navbar-main{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.navbar-main .nav-link{font-weight:600;color:#333;padding:.5rem 1rem;transition:color .2s}
+.navbar-main .nav-link:hover,.navbar-main .nav-link.active{color:var(--bp)}
+.navbar-brand img{height:clamp(40px,5vw,60px)}
+.btn-cart{background:none;border:none;color:var(--bp);font-size:1.4rem;position:relative;cursor:pointer}
+.cart-badge{position:absolute;top:-6px;right:-8px;background:var(--bg);color:#fff;border-radius:50%;font-size:.65rem;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+.page-header{background:linear-gradient(135deg,var(--bi) 0%,var(--bp) 100%);padding:120px 0 50px;text-align:center;color:#fff}
+.page-header h1{font-family:'Raleway',sans-serif;font-size:clamp(1.6rem,4vw,2.5rem)}
+.breadcrumb-item a{color:rgba(255,255,255,.75);text-decoration:none}.breadcrumb-item a:hover{color:#fff}
+.breadcrumb-item.active{color:#fff}.breadcrumb-item+.breadcrumb-item::before{color:rgba(255,255,255,.5)}
+.filter-sidebar{background:#fff;border-radius:1rem;padding:1.5rem;box-shadow:0 2px 16px rgba(0,0,0,.07);position:sticky;top:90px}
+.filter-sidebar h5{font-weight:700;color:var(--bp);margin-bottom:.75rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.5px}
+.filter-group{margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid #f0ecfb}
+.filter-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.filter-tag{display:inline-block;padding:.28rem .75rem;border-radius:2rem;border:1.5px solid #e0d6f7;font-size:.8rem;font-weight:600;cursor:pointer;transition:background .18s,color .18s;margin:.2rem;color:#555;background:#fafbfc}
+.filter-tag:hover,.filter-tag.active{background:var(--bp);color:#fff;border-color:var(--bp)}
+.sort-bar{background:#fff;border-radius:.75rem;padding:.65rem 1rem;box-shadow:0 1px 8px rgba(0,0,0,.06);display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.sort-bar select{border:1.5px solid #e0d6f7;border-radius:.5rem;padding:.3rem .65rem;font-size:.88rem;color:#333;outline:none}
+.pc{border:1.5px solid #e0d6f7;border-radius:1rem;overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s;height:100%}
+.pc:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(102,15,241,.15)}
+.pc img{width:100%;height:220px;object-fit:cover}
+.pc .cb{padding:.9rem}
+.pc h6{margin-bottom:.25rem}.pc h6 a{color:#1a1a2e;text-decoration:none;font-weight:600;font-size:.88rem}
+.pc h6 a:hover{color:var(--bp)}
+.pc .sub{color:#888;font-size:.75rem;margin-bottom:.5rem}
+.pc .price{font-size:1.05rem;font-weight:700;color:#1a1a2e}
+.pc .price-old{font-size:.82rem;text-decoration:line-through;color:#f0b352}
+.avail-yes{color:green;font-size:.75rem;font-weight:700}
+.avail-no{color:#dc3545;font-size:.75rem;font-weight:700}
+.avail-soon{color:#dd791c;font-size:.75rem;font-weight:700}
+.bac{background:var(--bp);color:#fff;border:none;border-radius:2rem;padding:.4rem .9rem;font-size:.8rem;font-weight:600;cursor:pointer;transition:background .2s,transform .15s;white-space:nowrap}
+.bac:hover{background:var(--bd);transform:translateY(-2px)}
+.badge-top{background:#17a2b8;color:#fff;font-size:.7rem;padding:.2rem .5rem;border-radius:.3rem;position:absolute;right:8px;top:8px}
+.badge-new{background:var(--bp);color:#fff;font-size:.7rem;padding:.2rem .5rem;border-radius:.3rem;position:absolute;right:8px;top:8px}
+.badge-hit{background:#6c757d;color:#fff;font-size:.7rem;padding:.2rem .5rem;border-radius:.3rem;position:absolute;right:8px;top:8px}
+.badge-sale{background:#dc3545;color:#fff;font-size:.7rem;padding:.2rem .5rem;border-radius:.3rem;position:absolute;right:8px;top:8px}
+.pagination .page-link{color:var(--bp);border-color:#e0d6f7}
+.pagination .page-item.active .page-link{background:var(--bp);border-color:var(--bp);color:#fff}
+.footer{background:#1a1a2e;color:rgba(255,255,255,.7)}
+.footer h4{color:#fff;font-size:1rem;font-weight:700;margin-bottom:1rem}
+.footer a{color:rgba(255,255,255,.6);text-decoration:none;display:block;margin-bottom:.4rem;transition:color .2s}
+.footer a:hover{color:var(--bg)}
+.footer .sb{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);color:var(--bg);font-size:.95rem;text-decoration:none;transition:background .2s;margin-left:.4rem}
+.footer .sb:hover{background:var(--bg);color:#fff}
+.copyright{background:#12122a;color:rgba(255,255,255,.6);padding:.9rem 0;font-size:.82rem}
+.copyright a{color:rgba(255,255,255,.8);text-decoration:none}
+#btt{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;background:var(--bp);color:#fff;border:none;border-radius:50%;font-size:1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(102,15,241,.4);transition:background .2s;z-index:999}
+#btt:hover{background:var(--bd)}#btt.show{display:flex}
+.btn-berry{background:var(--bp);color:#fff;border:2px solid var(--bd);border-radius:.5rem;padding:.65rem 1.3rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:background .2s,transform .15s;cursor:pointer;font-size:.9rem}
+.btn-berry:hover{background:var(--bd);color:#fff;transform:translateY(-2px)}
+@media(max-width:991px){.topbar{display:none}.filter-sidebar{position:static}}
+@media(max-width:576px){.page-header{padding:90px 0 40px}}
+</style>
+</head>
+<body>
+<div id="spinner"><div class="spinner-grow text-primary" role="status" style="width:3rem;height:3rem;"></div></div>
+
+<div class="d-none d-lg-block topbar">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div>
+      <small class="me-4"><i class="fas fa-map-marker-alt me-2"></i><a href="#">м. Вінниця, вул. Зарічанська 10</a></small>
+      <small><i class="fas fa-phone me-2"></i><a href="tel:+380675555555">+38 (067) 555-55-55</a></small>
+    </div>
+    <small><i class="fas fa-envelope me-2"></i><a href="mailto:info@berry-farm.com">info@berry-farm.com</a></small>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-xl navbar-main sticky-top">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><img src="../public/build/assets/site/img/berry-farm-logo.png" alt="Berry-Farm"></a>
+    <div class="d-flex d-xl-none align-items-center gap-2">
+      <button class="btn-cart position-relative"><i class="fas fa-shopping-bag"></i><span class="cart-badge">0</span></button>
+      <button class="navbar-toggler border-0 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"><i class="fas fa-bars" style="color:var(--bp)"></i></button>
+    </div>
+    <div class="collapse navbar-collapse" id="navMain">
+      <div class="navbar-nav mx-auto">
+        <a href="index.html" class="nav-link">Головна</a>
+        <a href="aboutus.html" class="nav-link">Про нас</a>
+        <a href="catalog.html" class="nav-link active">Каталог</a>
+        <a href="index.html#reviews" class="nav-link">Відгуки</a>
+        <a href="index.html#faq" class="nav-link">FAQ</a>
+        <a href="contacts.html" class="nav-link">Контакти</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn-cart position-relative d-none d-xl-flex"><i class="fas fa-shopping-bag fa-lg"></i><span class="cart-badge">0</span></button>
+        <button class="btn btn-link p-0 text-muted"><i class="fas fa-user fa-lg"></i></button>
+        <div class="d-flex gap-1"><a href="#" class="btn btn-sm btn-outline-secondary px-2 py-1">UA</a><a href="#" class="btn btn-sm btn-outline-secondary px-2 py-1">RU</a></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Каталог саджанців</h1>
+  <nav aria-label="breadcrumb"><ol class="breadcrumb justify-content-center mb-0">
+    <li class="breadcrumb-item"><a href="index.html">Головна</a></li>
+    <li class="breadcrumb-item active">Каталог</li>
+  </ol></nav>
+</div>
+
+<div class="container py-5">
+  <div class="row g-4">
+
+    <!-- SIDEBAR -->
+    <div class="col-lg-3">
+      <div class="filter-sidebar" data-aos="fade-right">
+        <div class="filter-group">
+          <h5><i class="fas fa-search me-1"></i>Пошук</h5>
+          <div class="input-group input-group-sm">
+            <input id="searchInput" type="text" class="form-control" placeholder="Назва саджанця..." style="border:1.5px solid #e0d6f7;border-radius:.5rem 0 0 .5rem">
+            <button class="btn btn-sm" style="background:var(--bp);color:#fff;border-radius:0 .5rem .5rem 0" onclick="doFilter()"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <h5><i class="fas fa-layer-group me-1"></i>Категорії</h5>
+          <span class="filter-tag active" onclick="byCat('all',this)">Всі</span>
+          <span class="filter-tag" onclick="byCat('berry',this)">Ягідні</span>
+          <span class="filter-tag" onclick="byCat('blueberry',this)">Лохина</span>
+          <span class="filter-tag" onclick="byCat('fruit',this)">Плодові</span>
+          <span class="filter-tag" onclick="byCat('decorative',this)">Декоративні</span>
+          <span class="filter-tag" onclick="byCat('nut',this)">Горіхові</span>
+        </div>
+        <div class="filter-group">
+          <h5><i class="fas fa-tag me-1"></i>Мітки</h5>
+          <span class="filter-tag" onclick="this.classList.toggle('active')">ТОП</span>
+          <span class="filter-tag" onclick="this.classList.toggle('active')">NEW</span>
+          <span class="filter-tag" onclick="this.classList.toggle('active')">HIT</span>
+          <span class="filter-tag" onclick="this.classList.toggle('active')">Акція</span>
+          <span class="filter-tag" onclick="this.classList.toggle('active')">in vitro</span>
+        </div>
+        <div class="filter-group">
+          <h5><i class="fas fa-hryvnia-sign me-1"></i>Ціна (грн)</h5>
+          <div class="d-flex gap-2 align-items-center">
+            <input id="pMin" type="number" class="form-control form-control-sm" placeholder="від" style="border:1.5px solid #e0d6f7;border-radius:.5rem">
+            <span>—</span>
+            <input id="pMax" type="number" class="form-control form-control-sm" placeholder="до" style="border:1.5px solid #e0d6f7;border-radius:.5rem">
+          </div>
+          <button class="btn-berry w-100 mt-2 justify-content-center" style="border-radius:.5rem;padding:.4rem;font-size:.82rem" onclick="doFilter()">Застосувати</button>
+        </div>
+        <div class="filter-group">
+          <h5><i class="fas fa-check-circle me-1"></i>Наявність</h5>
+          <label class="d-flex align-items-center gap-2 mb-1" style="font-size:.85rem;cursor:pointer"><input type="checkbox" checked onchange="doFilter()"> В наявності</label>
+          <label class="d-flex align-items-center gap-2" style="font-size:.85rem;cursor:pointer"><input type="checkbox" onchange="doFilter()"> Під замовлення</label>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary w-100 mt-1" onclick="resetAll()"><i class="fas fa-redo me-1"></i>Скинути фільтри</button>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="col-lg-9">
+      <div class="sort-bar" data-aos="fade-down">
+        <span style="font-size:.88rem;font-weight:600;color:#555">Знайдено: <strong id="cnt">19</strong></span>
+        <div class="ms-auto d-flex align-items-center gap-2 flex-wrap">
+          <select onchange="doSort(this.value)" style="border:1.5px solid #e0d6f7;border-radius:.5rem;padding:.28rem .6rem;font-size:.85rem">
+            <option>За замовчуванням</option>
+            <option value="price-asc">Ціна ↑</option>
+            <option value="price-desc">Ціна ↓</option>
+            <option value="name">А–Я</option>
+          </select>
+          <button class="btn btn-sm border active" id="bg" onclick="setView('grid')"><i class="fas fa-th"></i></button>
+          <button class="btn btn-sm border" id="bl" onclick="setView('list')"><i class="fas fa-list"></i></button>
+        </div>
+      </div>
+
+      <div class="row g-3" id="pgrid">
+
+<!-- 1 Лохина Bluecrop -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="blueberry" data-p="95" data-n="Лохина Bluecrop">
+<div class="pc position-relative"><span class="badge-top"><i class="fas fa-thumbs-up"></i> ТОП</span>
+<img src="../public/build/assets/site/img/lohina-1.png" alt="Лохина Bluecrop">
+<div class="cb"><h6><a href="#">Лохина висока «Bluecrop»</a></h6><p class="sub">Ягідна · in vitro</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price-old">120 грн</span><br><span class="price">95 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 2 Лохина Duke -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="blueberry" data-p="75" data-n="Лохина Duke">
+<div class="pc position-relative"><span class="badge-new"><i class="fas fa-tag"></i> NEW</span>
+<img src="../public/build/assets/site/img/vegetable-item-5.jpg" alt="Лохина Duke">
+<div class="cb"><h6><a href="#">Лохина висока «Duke»</a></h6><p class="sub">Ягідна · in vitro</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">75 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 3 Лохина Patriot -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="blueberry" data-p="85" data-n="Лохина Patriot">
+<div class="pc position-relative"><span class="badge-hit"><i class="fas fa-fire"></i> HIT</span>
+<img src="../public/build/assets/site/img/vegetable-item-6.jpg" alt="Лохина Patriot">
+<div class="cb"><h6><a href="#">Лохина «Patriot»</a></h6><p class="sub">Ягідна · in vitro</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">85 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 4 Лохина Chandler -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="blueberry" data-p="90" data-n="Лохина Chandler">
+<div class="pc">
+<img src="../public/build/assets/site/img/vegetable-item-2.jpg" alt="Лохина Chandler">
+<div class="cb"><h6><a href="#">Лохина «Chandler»</a></h6><p class="sub">Ягідна · великоплідна</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">90 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 5 Малина Полька -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="berry" data-p="45" data-n="Малина Полька">
+<div class="pc position-relative"><span class="badge-new"><i class="fas fa-tag"></i> NEW</span>
+<img src="../public/build/assets/site/img/best-product-2.jpg" alt="Малина Полька">
+<div class="cb"><h6><a href="#">Малина «Полька»</a></h6><p class="sub">Ягідна · ремонтантна</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">45 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 6 Малина Геракл -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="berry" data-p="50" data-n="Малина Геракл">
+<div class="pc">
+<img src="../public/build/assets/site/img/fruite-item-2.jpg" alt="Малина Геракл">
+<div class="cb"><h6><a href="#">Малина «Геракл»</a></h6><p class="sub">Ягідна · ремонтантна</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">50 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 7 Ожина Натчез -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="berry" data-p="65" data-n="Ожина Натчез">
+<div class="pc">
+<img src="../public/build/assets/site/img/vegetable-item-4.jpg" alt="Ожина Натчез">
+<div class="cb"><h6><a href="#">Ожина «Натчез»</a></h6><p class="sub">Ягідна · безшипна</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">65 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 8 Жимолость Блакитне Веретено -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="berry" data-p="80" data-n="Жимолость Блакитне Веретено">
+<div class="pc position-relative"><span class="badge-new"><i class="fas fa-tag"></i> NEW</span>
+<img src="../public/build/assets/site/img/vegetable-item-3.jpg" alt="Жимолость Блакитне Веретено">
+<div class="cb"><h6><a href="#">Жимолость «Блакитне Веретено»</a></h6><p class="sub">Ягідна · рання</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">80 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 9 Жимолость Амфора -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="berry" data-p="85" data-n="Жимолость Амфора">
+<div class="pc position-relative"><span class="badge-top"><i class="fas fa-thumbs-up"></i> ТОП</span>
+<img src="../public/build/assets/site/img/gumolost-1.png" alt="Жимолость Амфора">
+<div class="cb"><h6><a href="#">Жимолость «Амфора»</a></h6><p class="sub">Ягідна · рання</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">85 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 10 Виноград Страшенський -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="fruit" data-p="120" data-n="Виноград Страшенський">
+<div class="pc">
+<img src="../public/build/assets/site/img/fruite-item-5.jpg" alt="Виноград Страшенський">
+<div class="cb"><h6><a href="#">Виноград «Страшенський»</a></h6><p class="sub">Плодова · столовий сорт</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">120 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 11 Виноград Кишмиш -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="fruit" data-p="130" data-n="Виноград Кишмиш">
+<div class="pc">
+<img src="../public/build/assets/site/img/best-product-5.jpg" alt="Виноград Кишмиш">
+<div class="cb"><h6><a href="#">Виноград «Кишмиш»</a></h6><p class="sub">Плодова · без кісточок</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">130 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 12 Абрикос Харгрів -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="fruit" data-p="95" data-n="Абрикос Харгрів">
+<div class="pc">
+<img src="../public/build/assets/site/img/best-product-4.jpg" alt="Абрикос Харгрів">
+<div class="cb"><h6><a href="#">Абрикос «Харгрів»</a></h6><p class="sub">Плодова · ранній сорт</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">95 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 13 Абрикос Нікітський -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="fruit" data-p="100" data-n="Абрикос Нікітський">
+<div class="pc">
+<img src="../public/build/assets/site/img/fruite-item-4.jpg" alt="Абрикос Нікітський">
+<div class="cb"><h6><a href="#">Абрикос «Нікітський»</a></h6><p class="sub">Плодова · великоплідний</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">100 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 14 Яблуня Голден -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="fruit" data-p="110" data-n="Яблуня Голден">
+<div class="pc">
+<img src="../public/build/assets/site/img/best-product-6.jpg" alt="Яблуня Голден">
+<div class="cb"><h6><a href="#">Яблуня «Голден»</a></h6><p class="sub">Плодова · зимовий сорт</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">110 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 15 Яблуня Флоріна -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="fruit" data-p="105" data-n="Яблуня Флоріна">
+<div class="pc">
+<img src="../public/build/assets/site/img/fruite-item-6.jpg" alt="Яблуня Флоріна">
+<div class="cb"><h6><a href="#">Яблуня «Флоріна»</a></h6><p class="sub">Плодова · популярний сорт</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">105 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 16 Гортензія Лаймлайт -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="decorative" data-p="125" data-n="Гортензія Лаймлайт">
+<div class="pc position-relative"><span class="badge-top"><i class="fas fa-thumbs-up"></i> ТОП</span>
+<img src="../public/build/assets/site/img/vegetable-item-1.jpg" alt="Гортензія Лаймлайт">
+<div class="cb"><h6><a href="#">Гортензія «Лаймлайт»</a></h6><p class="sub">Декоративна · волотиста</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">125 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 17 Гортензія Annabelle -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="decorative" data-p="130" data-n="Гортензія Annabelle">
+<div class="pc position-relative"><span class="badge-top"><i class="fas fa-thumbs-up"></i> ТОП</span>
+<img src="../public/build/assets/site/img/gortenziya-1.jpg" alt="Гортензія Annabelle">
+<div class="cb"><h6><a href="#">Гортензія «Annabelle»</a></h6><p class="sub">Декоративна · деревовидна</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">130 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 18 Гортензія Incrediball -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="decorative" data-p="145" data-n="Гортензія Incrediball">
+<div class="pc position-relative"><span class="badge-new"><i class="fas fa-tag"></i> NEW</span>
+<img src="../public/build/assets/site/img/gortenziya-1.png" alt="Гортензія Incrediball">
+<div class="cb"><h6><a href="#">Гортензія «Incrediball»</a></h6><p class="sub">Декоративна · велетенські суцвіття</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">145 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+<!-- 19 Фундук Трапезунд -->
+<div class="col-sm-6 col-xl-4 pi" data-cat="nut" data-p="110" data-n="Фундук Трапезунд">
+<div class="pc position-relative"><span class="badge-hit"><i class="fas fa-fire"></i> HIT</span>
+<img src="../public/build/assets/site/img/funduk-1.png" alt="Фундук Трапезунд">
+<div class="cb"><h6><a href="#">Фундук «Трапезунд»</a></h6><p class="sub">Горіхова · великоплідний</p>
+<div class="d-flex justify-content-between align-items-end">
+<div><span class="price">110 грн</span><br><span class="avail-yes"><i class="far fa-check-circle"></i> В наявності</span></div>
+<button class="bac"><i class="fas fa-shopping-bag me-1"></i>До кошика</button></div></div></div></div>
+
+      </div><!-- /pgrid -->
+      <div id="no-res" class="text-center py-5 d-none"><i class="fas fa-search fa-3x text-muted mb-3 d-block"></i><h5 class="text-muted">Нічого не знайдено</h5><button class="btn btn-link" onclick="resetAll()">Скинути фільтри</button></div>
+
+      <!-- Payment methods -->
+      <div class="text-center mt-4 mb-2" data-aos="fade-up">
+        <p class="text-muted small mb-2">Способи оплати:</p>
+        <img src="../public/build/assets/site/img/payment.png" alt="Способи оплати" class="img-fluid" style="max-height:40px;opacity:.7">
+      </div>
+
+      <nav class="mt-3" aria-label="Сторінки">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<footer class="footer pt-5">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mb-4">
+      <div><h3 class="text-white mb-0">Berry-Farm</h3><p class="mb-0" style="color:var(--bg)">Розсадник саджанців · Безкоштовна консультація</p></div>
+      <div class="d-flex gap-2 mt-3 mt-md-0">
+        <a href="https://www.instagram.com/berryfarm_ukraine/" class="sb"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/berryfarmUkraine" class="sb"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+    <hr style="border-color:rgba(226,175,24,.3);margin-bottom:2rem">
+    <div class="row g-4 pb-5">
+      <div class="col-lg-3 col-md-6"><h4>Про компанію</h4><p>ФГ «Berry-Farm» · З 2015 року</p><a href="aboutus.html" style="color:var(--bg);border-bottom:1px solid var(--bg)">Читати більше</a></div>
+      <div class="col-lg-3 col-md-6"><h4>Інформація</h4><a href="aboutus.html">Про нас</a><a href="contacts.html">Контакти</a><a href="index.html#faq">FAQ</a></div>
+      <div class="col-lg-3 col-md-6"><h4>Каталог</h4><a href="catalog.html">Лохина</a><a href="catalog.html">Полуниця</a><a href="catalog.html">Малина</a><a href="catalog.html">Гортензія</a></div>
+      <div class="col-lg-3 col-md-6"><h4>Контакти</h4><p><i class="fas fa-map-marker-alt me-2" style="color:var(--bg)"></i> м. Вінниця</p><p><i class="fas fa-phone me-2" style="color:var(--bg)"></i> +38 (067) 555-55-55</p></div>
+    </div>
+  </div>
+</footer>
+<div class="copyright"><div class="container d-flex flex-wrap justify-content-between"><span><i class="fas fa-copyright me-1"></i> Berry-Farm, всі права захищені.</span><span>Розроблено <a href="#">Dmytro Matviyuk</a></span></div></div>
+<button id="btt"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('spinner').classList.add('hidden'),300));
+AOS.init({once:true,duration:600,offset:60});
+const btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>btt.classList.toggle('show',scrollY>400));
+btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.querySelectorAll('.bac').forEach(b=>{b.addEventListener('click',function(){document.querySelectorAll('.cart-badge').forEach(c=>{c.textContent=+c.textContent+1});this.innerHTML='<i class="fas fa-check me-1"></i>Додано!';this.style.background='#28a745';setTimeout(()=>{this.innerHTML='<i class="fas fa-shopping-bag me-1"></i>До кошика';this.style.background=''},1500)})});
+function byCat(cat,el){document.querySelectorAll('.filter-group .filter-tag').forEach(t=>{if(['Всі','Ягідні','Лохина','Плодові','Декоративні','Горіхові'].includes(t.textContent))t.classList.remove('active')});el.classList.add('active');let v=0;document.querySelectorAll('.pi').forEach(i=>{const s=cat==='all'||i.dataset.cat===cat;i.style.display=s?'':'none';if(s)v++});document.getElementById('cnt').textContent=v;document.getElementById('no-res').classList.toggle('d-none',v>0)}
+function doFilter(){const q=document.getElementById('searchInput').value.toLowerCase();const mn=+document.getElementById('pMin').value||0;const mx=+document.getElementById('pMax').value||Infinity;let v=0;document.querySelectorAll('.pi').forEach(i=>{const ok=(!q||i.dataset.n.toLowerCase().includes(q))&&(+i.dataset.p>=mn)&&(+i.dataset.p<=mx);i.style.display=ok?'':'none';if(ok)v++});document.getElementById('cnt').textContent=v;document.getElementById('no-res').classList.toggle('d-none',v>0)}
+function doSort(v){const g=document.getElementById('pgrid');[...g.querySelectorAll('.pi')].sort((a,b)=>{if(v==='price-asc')return+a.dataset.p-+b.dataset.p;if(v==='price-desc')return+b.dataset.p-+a.dataset.p;if(v==='name')return a.dataset.n.localeCompare(b.dataset.n,'uk');return 0}).forEach(i=>g.appendChild(i))}
+function setView(v){document.querySelectorAll('.pi').forEach(i=>{i.className=v==='list'?'col-12 pi':'col-sm-6 col-xl-4 pi';const c=i.querySelector('.pc');const img=i.querySelector('img');if(v==='list'){c.style.cssText='display:flex;flex-direction:row';img.style.cssText='width:180px;height:150px;object-fit:cover;flex-shrink:0'}else{c.style.cssText='';img.style.cssText='width:100%;height:220px;object-fit:cover'}});document.getElementById('bg').classList.toggle('active',v==='grid');document.getElementById('bl').classList.toggle('active',v==='list')}
+function resetAll(){document.getElementById('searchInput').value='';document.getElementById('pMin').value='';document.getElementById('pMax').value='';document.querySelectorAll('.pi').forEach(i=>i.style.display='');document.getElementById('cnt').textContent=document.querySelectorAll('.pi').length;document.getElementById('no-res').classList.add('d-none');document.querySelectorAll('.filter-group .filter-tag').forEach(t=>t.classList.remove('active'));document.querySelector('.filter-tag').classList.add('active')}
+</script>
+</body>
+</html>

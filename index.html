@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berry-Farm — Розсадник ягідних та декоративних саджанців</title>
+    <meta name="description" content="Berry-Farm — власний розсадник саджанців. Полуниця, лохина, малина, смородина, ожина. Очищення in vitro. Доставка по всій Україні.">
+    <meta name="keywords" content="саджанці, полуниця, лохина, малина, розсадник, ягоди, Berry-Farm">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Berry-Farm — Розсадник саджанців">
+    <meta property="og:description" content="Власний розсадник ягідних та декоративних саджанців. Очищення in vitro.">
+    <meta property="og:image" content="../public/build/assets/site/img/berry-farm-logo.png">
+    <meta property="og:site_name" content="berry-farm.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../public/favicon/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Owl Carousel -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet">
+
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --berry-purple: #660ff1;
+            --berry-purple-dark: #2f0277;
+            --berry-green: #81c408;
+            --berry-indigo: #3d0582;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* ===== SPINNER ===== */
+        #spinner {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity .4s;
+        }
+        #spinner.hidden { opacity: 0; pointer-events: none; }
+
+        /* ===== TOPBAR ===== */
+        .topbar {
+            background: var(--berry-indigo);
+            padding: 8px 0;
+            border-radius: 0 0 20px 20px;
+        }
+        .topbar a { color: #fff; text-decoration: none; font-size: .85rem; }
+        .topbar a:hover { color: var(--berry-green); }
+        .topbar .top-info i { color: var(--berry-green); }
+
+        /* ===== NAVBAR ===== */
+        .navbar-main {
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+        }
+        .navbar-main .nav-link {
+            font-weight: 600;
+            color: #333;
+            padding: .5rem 1rem;
+            transition: color .2s;
+        }
+        .navbar-main .nav-link:hover,
+        .navbar-main .nav-link.active { color: var(--berry-purple); }
+        .navbar-brand img { height: clamp(40px, 5vw, 60px); }
+
+        .btn-cart {
+            background: none;
+            border: none;
+            color: var(--berry-purple);
+            font-size: 1.4rem;
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--berry-green);
+            color: #fff;
+            border-radius: 50%;
+            font-size: .65rem;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== HERO ===== */
+        .hero-header {
+            background: linear-gradient(135deg, var(--berry-indigo) 0%, var(--berry-purple) 60%, #9b59b6 100%);
+            padding: 100px 0 60px;
+            min-height: 520px;
+        }
+        .hero-header h4 { color: #e9fac8; font-size: 1.1rem; letter-spacing: .5px; }
+        .hero-header h1 { font-family: 'Raleway', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; }
+        .hero-header .carousel-item img { border-radius: 1rem; object-fit: cover; height: 380px; }
+        .hero-header .carousel-item a {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,.2);
+            color: #fff;
+            border-radius: .5rem;
+            padding: .4rem 1.2rem;
+            text-decoration: none;
+            backdrop-filter: blur(4px);
+            font-weight: 600;
+        }
+
+        /* ===== SECTIONS COMMON ===== */
+        section { padding: 64px 0; }
+        .section-title {
+            font-family: 'Raleway', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 2rem;
+        }
+
+        /* ===== PRODUCT CARD ===== */
+        .product-card {
+            border: 1.5px solid #e0d6f7;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: #fff;
+            transition: transform .25s, box-shadow .25s;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(102,15,241,.15);
+        }
+        .product-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+        .product-card .badge-tag {
+            position: absolute;
+            right: 12px;
+            border-radius: .4rem;
+            padding: .25rem .8rem;
+            font-size: .8rem;
+            font-weight: 600;
+        }
+        .product-card .card-body { padding: 1.2rem; }
+        .product-card h5 a { color: #1a1a2e; text-decoration: none; font-weight: 600; }
+        .product-card h5 a:hover { color: var(--berry-purple); }
+        .product-card .price { font-size: 1.2rem; font-weight: 700; color: #1a1a2e; }
+        .product-card .price-old {
+            font-size: .95rem;
+            text-decoration: line-through;
+            color: #f0b352;
+        }
+        .product-card .availability { font-size: .8rem; font-weight: 700; }
+        .btn-add-cart {
+            background: var(--berry-purple);
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: .5rem 1.2rem;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s, transform .15s;
+        }
+        .btn-add-cart:hover { background: var(--berry-purple-dark); transform: translateY(-2px); }
+
+        /* ===== IN-VITRO BANNER ===== */
+        .banner-invitro {
+            background: #f8f9fa;
+            border-top: 1px solid #ece6fa;
+            border-bottom: 1px solid #ece6fa;
+        }
+        .banner-invitro img { border-radius: 1rem; }
+        .benefit-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ===== CATEGORIES ===== */
+        .category-card {
+            background: #fff;
+            border-radius: 1rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 16px rgba(0,0,0,.07);
+            transition: transform .25s, box-shadow .25s;
+            height: 100%;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 28px rgba(102,15,241,.12);
+        }
+        .category-card img { border-radius: .75rem; width: 100%; height: 160px; object-fit: cover; margin-bottom: 1rem; }
+        .category-card h5 a { color: #1a1a2e; text-decoration: none; font-weight: 600; }
+
+        /* ===== STEP ORDER ===== */
+        .step-order-item {
+            --accent-color: #660ff1;
+            background: #f0f0f0;
+            border-radius: .75rem;
+            padding: 1.5rem 1rem 1rem;
+            position: relative;
+            height: 100%;
+            box-shadow: 4px 4px 10px rgba(0,0,0,.1);
+        }
+        .step-order-item .step-num {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-align: center;
+            line-height: 1;
+            margin-bottom: .5rem;
+        }
+        .step-order-item .step-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            padding-bottom: .75rem;
+            border-bottom: 2px solid rgba(0,0,0,.1);
+            margin-bottom: .75rem;
+        }
+        .step-order-item .step-descr { color: #555; font-size: .9rem; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonial-item {
+            background: #f8f9fa;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 0 .5rem;
+            position: relative;
+        }
+        .testimonial-item .quote-icon {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            color: #ccc;
+            font-size: 1.5rem;
+        }
+        .testimonial-item h4 { font-size: 1rem; font-weight: 700; color: #1a1a2e; }
+
+        /* ===== BLOG CARD ===== */
+        .blog-card {
+            border-radius: 1rem;
+            overflow: hidden;
+            background: #f4f6f8;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform .25s, box-shadow .25s;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,.13); }
+        .blog-card img { width: 100%; height: 220px; object-fit: cover; }
+        .blog-card .card-body { padding: 1rem; flex: 1; }
+        .blog-card .tag {
+            display: inline-block;
+            padding: .2em .75em;
+            border-radius: 1em;
+            font-size: .75rem;
+            color: #fff;
+            background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+            margin-bottom: .5rem;
+        }
+        .blog-card h5 a { color: #1a1a2e; text-decoration: none; font-weight: 600; font-size: .95rem; }
+        .blog-card h5 a:hover { color: var(--berry-purple); }
+        .blog-card .card-footer { padding: .75rem 1rem; font-size: .8rem; color: #888; background: transparent; border-top: 1px solid #e8e8e8; }
+
+        /* ===== FAQ ===== */
+        .faq-item {
+            background: #fff;
+            border-radius: .75rem;
+            margin-bottom: .75rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+            overflow: hidden;
+        }
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 1.25rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1a1a2e;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .faq-question:hover { background: #f8f4ff; color: var(--berry-purple); }
+        .faq-question .faq-icon { font-size: 1.1rem; transition: transform .3s; flex-shrink: 0; }
+        .faq-question.open .faq-icon { transform: rotate(180deg); color: var(--berry-purple); }
+        .faq-answer { padding: 0 1.5rem 1.25rem; color: #555; font-size: .95rem; line-height: 1.7; display: none; }
+        .faq-answer.open { display: block; }
+
+        /* ===== FOOTER ===== */
+        .footer { background: #1a1a2e; color: rgba(255,255,255,.7); }
+        .footer h4 { color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; }
+        .footer a { color: rgba(255,255,255,.6); text-decoration: none; display: block; margin-bottom: .4rem; transition: color .2s; }
+        .footer a:hover { color: var(--berry-green); }
+        .footer .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,.3);
+            color: var(--berry-green);
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background .2s, border-color .2s;
+            margin-left: .4rem;
+        }
+        .footer .social-btn:hover { background: var(--berry-green); color: #fff; border-color: var(--berry-green); }
+        .footer-divider { border-color: rgba(226,175,24,.3); margin-bottom: 2rem; }
+
+        .copyright {
+            background: #12122a;
+            color: rgba(255,255,255,.6);
+            padding: 1rem 0;
+            font-size: .85rem;
+        }
+        .copyright a { color: rgba(255,255,255,.8); text-decoration: none; }
+
+        /* ===== BACK TO TOP ===== */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: var(--berry-purple);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(102,15,241,.4);
+            transition: background .2s, transform .2s;
+            z-index: 999;
+        }
+        #back-to-top:hover { background: var(--berry-purple-dark); transform: translateY(-3px); }
+        #back-to-top.show { display: flex; }
+
+        /* ===== UTILS ===== */
+        .bg-berry { background: var(--berry-purple) !important; }
+        .text-berry { color: var(--berry-purple) !important; }
+        .btn-berry {
+            background: var(--berry-purple);
+            color: #fff;
+            border: 2px solid var(--berry-purple-dark);
+            border-radius: .5rem;
+            padding: .75rem 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            transition: background .2s, transform .15s;
+        }
+        .btn-berry:hover { background: var(--berry-purple-dark); color: #fff; transform: translateY(-2px); }
+        .btn-outline-green {
+            border: 2px solid var(--berry-green);
+            color: var(--berry-green);
+            background: none;
+            border-radius: 2rem;
+            padding: .6rem 1.4rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            transition: background .2s, color .2s;
+        }
+        .btn-outline-green:hover { background: var(--berry-green); color: #fff; }
+
+        @media (max-width: 991px) {
+            .hero-header { padding: 90px 0 40px; }
+            .topbar { display: none; }
+        }
+        @media (max-width: 576px) {
+            section { padding: 40px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Spinner -->
+<div id="spinner">
+    <div class="spinner-grow text-primary" role="status" style="width:3rem;height:3rem;"></div>
+</div>
+
+<!-- ===== TOPBAR ===== -->
+<div class="d-none d-lg-block topbar">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <small class="me-4"><i class="fas fa-map-marker-alt me-2"></i><a href="#">м. Вінниця, вул. Зарічанська 10</a></small>
+            <small><i class="fas fa-phone me-2"></i><a href="tel:+380675555555">+38 (067) 555-55-55</a></small>
+        </div>
+        <div>
+            <small><i class="fas fa-envelope me-2"></i><a href="mailto:info@berry-farm.com">info@berry-farm.com</a></small>
+        </div>
+    </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-xl navbar-main sticky-top" style="top:0;">
+    <div class="container">
+        <a href="index.html" class="navbar-brand">
+            <img src="../public/build/assets/site/img/berry-farm-logo.png" alt="Berry-Farm логотип">
+        </a>
+        <div class="d-flex d-xl-none align-items-center gap-2">
+            <button class="btn-cart position-relative" aria-label="Кошик">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge">0</span>
+            </button>
+            <button class="navbar-toggler border-0 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-label="Меню">
+                <i class="fas fa-bars text-berry"></i>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navMain">
+            <div class="navbar-nav mx-auto">
+                <a href="index.html" class="nav-link active">Головна</a>
+                <a href="aboutus.html" class="nav-link">Про нас</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="#reviews" class="nav-link">Відгуки</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="contacts.html" class="nav-link">Контакти</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn-cart position-relative d-none d-xl-flex" aria-label="Кошик">
+                    <i class="fas fa-shopping-bag fa-lg"></i>
+                    <span class="cart-badge">0</span>
+                </button>
+                <button class="btn btn-link p-0 text-muted" aria-label="Увійти">
+                    <i class="fas fa-user fa-lg"></i>
+                </button>
+                <div class="d-flex gap-1">
+                    <a href="#" class="btn btn-sm btn-outline-secondary px-2 py-1">UA</a>
+                    <a href="#" class="btn btn-sm btn-outline-secondary px-2 py-1">RU</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero-header d-flex align-items-center">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-12 col-lg-7" data-aos="fade-right">
+                <h4 class="mb-3">Власний розсадник ягідних і декоративних рослин</h4>
+                <h1 class="mb-4">Якісні саджанці прямо з нашого розсадника — від виробника</h1>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="catalog.html" class="btn-berry">
+                        <i class="fas fa-cubes"></i> Переглянути каталог
+                    </a>
+                    <a href="faq.html" class="btn btn-outline-info border-2 py-3 px-4 text-white rounded-3">
+                        <i class="fas fa-info-circle"></i> Про саджанці
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-5" data-aos="fade-left">
+                <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../public/build/assets/site/img/hero-img.jpg" class="d-block w-100" alt="Саджанці лохини">
+                            <a href="catalog.html">Лохина висока</a>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../public/build/assets/site/img/hero-img-1.jpg" class="d-block w-100" alt="Лохина Patriot">
+                            <a href="catalog.html">Лохина «Patriot»</a>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../public/build/assets/site/img/hero-img-2.jpg" class="d-block w-100" alt="Саджанці малини">
+                            <a href="catalog.html">Малина ремонтантна</a>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../public/build/assets/site/img/gortenziya-1.jpg" class="d-block w-100" alt="Гортензія">
+                            <a href="catalog.html">Гортензія</a>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../public/build/assets/site/img/cart-page-header-img.jpg" class="d-block w-100" alt="Саджанці">
+                            <a href="catalog.html">Ягідні саджанці</a>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Попередній</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Наступний</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TOP PRODUCTS ===== -->
+<section>
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Топ продукти</h2>
+        <div class="row g-4">
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card position-relative">
+                    <span class="badge-tag bg-info text-white" style="top:12px;">
+                        <i class="fas fa-thumbs-up"></i> ТОП
+                    </span>
+                    <img src="../public/build/assets/site/img/lohina-1.png" alt="Лохина">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Лохина висока «Bluecrop»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price-old">120 грн</span><br>
+                                <span class="price">95 грн</span><br>
+                                <span class="availability text-success"><i class="far fa-check-circle"></i> В наявності</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-bag me-1"></i> До кошика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card position-relative">
+                    <span class="badge-tag bg-primary text-white" style="top:12px;">
+                        <i class="fas fa-tag"></i> NEW
+                    </span>
+                    <img src="../public/build/assets/site/img/gumolost-1.png" alt="Жимолость">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Жимолость їстівна «Амфора»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price">85 грн</span><br>
+                                <span class="availability text-success"><i class="far fa-check-circle"></i> В наявності</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-bag me-1"></i> До кошика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card position-relative">
+                    <span class="badge-tag bg-secondary text-white" style="top:12px;">
+                        <i class="fas fa-fire"></i> HIT
+                    </span>
+                    <img src="../public/build/assets/site/img/funduk-1.png" alt="Фундук">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Фундук «Трапезунд»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price">110 грн</span><br>
+                                <span class="availability text-success"><i class="far fa-check-circle"></i> В наявності</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-bag me-1"></i> До кошика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card position-relative">
+                    <img src="../public/build/assets/site/img/featur-2.jpg" alt="Полуниця">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Полуниця «Клері»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price">12 грн</span><br>
+                                <span class="availability text-success"><i class="far fa-check-circle"></i> В наявності</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-bag me-1"></i> До кошика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="catalog.html" class="btn-berry"><i class="fas fa-th-large"></i> Увесь каталог</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== IN-VITRO BANNER ===== -->
+<section class="banner-invitro">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-4" data-aos="fade-right">
+                <img src="../public/build/assets/site/img/in-vitro-1.jpg" class="img-fluid w-100" alt="Лабораторія in vitro">
+            </div>
+            <div class="col-lg-8" data-aos="fade-left">
+                <h2 class="section-title">Очищення від вірусів методом in vitro</h2>
+                <p class="text-muted mb-4">
+                    Наш розсадник використовує мікроклональне розмноження рослин в лабораторних умовах.
+                    Це гарантує повну відсутність вірусів, грибків та бактерій у наших саджанців.
+                </p>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="benefit-number flex-shrink-0">1</div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Повна вірусна чистота</h6>
+                            <p class="text-muted mb-0 small">Рослини вирощуються в стерильних умовах і проходять контроль якості на кожному етапі.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="benefit-number flex-shrink-0">2</div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Генетична ідентичність сорту</h6>
+                            <p class="text-muted mb-0 small">Метод in vitro забезпечує точне відтворення сортових характеристик рослини.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="benefit-number flex-shrink-0">3</div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Висока приживлюваність</h6>
+                            <p class="text-muted mb-0 small">Здорові рослини без стресу — краще приживлюються після пересадки на постійне місце.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <a href="laboratory.html" class="btn-outline-green">
+                        <i class="fas fa-flask"></i> Детальніше про метод in vitro
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NEW PRODUCTS ===== -->
+<section>
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Нові надходження</h2>
+        <div class="row g-4">
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card position-relative">
+                    <span class="badge-tag bg-primary text-white" style="top:12px;"><i class="fas fa-tag"></i> NEW</span>
+                    <img src="../public/build/assets/site/img/best-product-2.jpg" alt="Малина">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Малина «Полька»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price">45 грн</span><br>
+                                <span class="availability text-success"><i class="far fa-check-circle"></i> В наявності</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-bag me-1"></i> До кошика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <img src="../public/build/assets/site/img/vegetable-item-3.jpg" alt="Смородина">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Смородина чорна «Титанія»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price">55 грн</span><br>
+                                <span class="availability text-success"><i class="far fa-check-circle"></i> В наявності</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-bag me-1"></i> До кошика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <img src="../public/build/assets/site/img/vegetable-item-4.jpg" alt="Ожина">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Ожина «Triple Crown»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price">65 грн</span><br>
+                                <span class="availability text-success"><i class="far fa-check-circle"></i> В наявності</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-bag me-1"></i> До кошика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card">
+                    <img src="../public/build/assets/site/img/best-product-5.jpg" alt="Виноград">
+                    <div class="card-body">
+                        <h5><a href="catalog.html">Виноград «Кишмиш»</a></h5>
+                        <div class="d-flex justify-content-between align-items-end mt-3">
+                            <div>
+                                <span class="price">60 грн</span><br>
+                                <span class="availability text-danger"><i class="fas fa-times-circle"></i> Немає в наявності</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== OWN NURSERY BANNER ===== -->
+<section class="banner-invitro">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="section-title">Власний розсадник</h2>
+                <p class="text-muted mb-4">
+                    Ми вирощуємо саджанці самостійно — від маточника до готової продукції.
+                    Це дозволяє нам контролювати якість на кожному етапі та пропонувати найкращі ціни.
+                </p>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="benefit-number flex-shrink-0">1</div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Власне виробництво</h6>
+                            <p class="text-muted mb-0 small">Всі саджанці вирощуються безпосередньо у нашому розсаднику без посередників.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="benefit-number flex-shrink-0">2</div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Контроль якості</h6>
+                            <p class="text-muted mb-0 small">Кожна партія перевіряється нашими агрономами перед відвантаженням.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="benefit-number flex-shrink-0">3</div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Сертифіковані сорти</h6>
+                            <p class="text-muted mb-0 small">Маточний матеріал отримано від офіційних селекційних станцій.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div id="nurseryCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+                    <div class="carousel-inner" style="border-radius:1rem; overflow:hidden;">
+                        <div class="carousel-item active">
+                            <img src="../public/build/assets/site/img/our-values.jpg" class="d-block w-100" style="height:360px;object-fit:cover;" alt="Розсадник">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../public/build/assets/site/img/baner-1.png" class="d-block w-100" style="height:360px;object-fit:cover;" alt="Рослини">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../public/build/assets/site/img/banner-fruits.jpg" class="d-block w-100" style="height:360px;object-fit:cover;" alt="Ягоди">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#nurseryCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#nurseryCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== POPULAR CATEGORIES ===== -->
+<section style="background:#fafbfc;">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Популярні категорії</h2>
+        <div class="row g-4">
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/lohina-1.png" alt="Лохина">
+                    <h5><a href="catalog.html">Лохина</a></h5>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/featur-2.jpg" alt="Полуниця">
+                    <h5><a href="catalog.html">Полуниця</a></h5>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/gortenziya-1.jpg" alt="Гортензія">
+                    <h5><a href="catalog.html">Гортензія</a></h5>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/funduk-1.png" alt="Фундук">
+                    <h5><a href="catalog.html">Фундук</a></h5>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="250">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/gumolost-1.png" alt="Жимолость">
+                    <h5><a href="catalog.html">Жимолость</a></h5>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/best-product-2.jpg" alt="Малина">
+                    <h5><a href="catalog.html">Малина</a></h5>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="350">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/vegetable-item-3.jpg" alt="Смородина">
+                    <h5><a href="catalog.html">Смородина</a></h5>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
+                <div class="category-card">
+                    <img src="../public/build/assets/site/img/vegetable-item-4.jpg" alt="Ожина">
+                    <h5><a href="catalog.html">Ожина</a></h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== ORDER & DELIVERY ===== -->
+<section>
+    <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">Замовлення і доставка</h2>
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+                <div class="step-order-item" style="--accent-color:#FF6F00;">
+                    <div class="step-num">1</div>
+                    <div class="step-title">Замовлення</div>
+                    <div class="step-descr">
+                        Оберіть саджанці в каталозі й додайте до кошика.
+                        <div class="d-flex flex-column gap-2 mt-3">
+                            <a href="catalog.html" class="btn-outline-green btn-sm text-center">
+                                <i class="fas fa-shopping-bag"></i> Переглянути каталог
+                            </a>
+                            <a href="promotions.html" class="btn-outline-green btn-sm text-center">
+                                <i class="fas fa-tag"></i> Акції та знижки
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="step-order-item" style="--accent-color:#19306f;">
+                    <div class="step-num">2</div>
+                    <div class="step-title">Оплата</div>
+                    <div class="step-descr">
+                        Оплатіть замовлення зручним способом:
+                        <ul class="mt-2 ps-3">
+                            <li><i class="far fa-check-circle text-success"></i> Накладений платіж</li>
+                            <li><i class="far fa-check-circle text-success"></i> Онлайн карткою</li>
+                            <li><i class="far fa-check-circle text-success"></i> Безготівковий розрахунок</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="step-order-item" style="--accent-color:#008DC2;">
+                    <div class="step-num">3</div>
+                    <div class="step-title">Обробка</div>
+                    <div class="step-descr">
+                        Оперативно обробляємо замовлення. Саджанці відправляємо в день замовлення або наступного дня.
+                        <div class="mt-3">
+                            <a href="contacts.html" class="btn-outline-green btn-sm">
+                                <i class="fas fa-phone"></i> Зв'язатися з менеджером
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-order-item" style="--accent-color:#0B456A;">
+                    <div class="step-num">4</div>
+                    <div class="step-title">Доставка</div>
+                    <div class="step-descr">
+                        Доставляємо по всій Україні:
+                        <ul class="mt-2 ps-3">
+                            <li><i class="far fa-check-circle text-success"></i> Кур'єром по місту</li>
+                            <li><i class="far fa-check-circle text-success"></i> Новою Поштою</li>
+                            <li><i class="far fa-check-circle text-success"></i> Самовивіз із розсадника</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                <div class="step-order-item" style="--accent-color:#81c406;">
+                    <div class="step-num">5</div>
+                    <div class="step-title">Отримання</div>
+                    <div class="step-descr">
+                        Отримайте замовлення та насолоджуйтесь рослинами!
+                        <div class="mt-3">
+                            <a href="#reviews" class="btn-outline-green btn-sm">
+                                <i class="fas fa-comment"></i> Залишити відгук
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="step-order-item" style="--accent-color:#4a7005;">
+                    <div class="step-num">6</div>
+                    <div class="step-title">Догляд</div>
+                    <div class="step-descr">
+                        Ми допоможемо доглядати за рослинами. Консультації та корисні матеріали.
+                        <div class="mt-3">
+                            <a href="faq.html" class="btn-outline-green btn-sm">
+                                <i class="fas fa-book"></i> Корисні матеріали
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews" style="background:#fafbfc;">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Відгуки клієнтів</h2>
+        <div class="owl-carousel testimonial-carousel" data-aos="fade-up">
+
+            <div class="testimonial-item">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="pb-3 mb-3 border-bottom">
+                    <h4>Відмінна якість саджанців!</h4>
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-0 text-muted small">Замовив лохину — прийшла швидко, коренева система відмінна. Всі кущі прижилися. Рекомендую!</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="../public/build/assets/site/img/avatar.jpg" class="rounded-circle" width="40" height="40" alt="Олексій" style="object-fit:cover">
+                    <div>
+                        <strong class="d-block" style="font-size:.9rem;">Олексій К.</strong>
+                        <small class="text-muted">Київ</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-item">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="pb-3 mb-3 border-bottom">
+                    <h4>Дякую за консультацію!</h4>
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-0 text-muted small">Менеджер допоміг підібрати сорти для мого регіону. Саджанці полуниці in vitro — просто диво!</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="../public/build/assets/site/img/testimonial-1.jpg" class="rounded-circle" width="40" height="40" alt="Марія" style="object-fit:cover">
+                    <div>
+                        <strong class="d-block" style="font-size:.9rem;">Марія В.</strong>
+                        <small class="text-muted">Вінниця</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-item">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="pb-3 mb-3 border-bottom">
+                    <h4>Купую вже третій рік</h4>
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <p class="mb-0 text-muted small">Щороку поповнюю свій сад новими сортами. Ціни чесні, якість стабільна, доставка швидка.</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="../public/img/no-user-image-icon.jpeg" class="rounded-circle" width="40" height="40" alt="Ігор" style="object-fit:cover">
+                    <div>
+                        <strong class="d-block" style="font-size:.9rem;">Ігор П.</strong>
+                        <small class="text-muted">Харків</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-item">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="pb-3 mb-3 border-bottom">
+                    <h4>Велике замовлення для фермерства</h4>
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-0 text-muted small">Замовили 500 кущів лохини для промислового саду. Супровід від а до я, документи в порядку.</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="../public/img/no-user-image-icon.jpeg" class="rounded-circle" width="40" height="40" alt="Фермерство" style="object-fit:cover">
+                    <div>
+                        <strong class="d-block" style="font-size:.9rem;">ФГ «Урожай»</strong>
+                        <small class="text-muted">Полтавська обл.</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section>
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Блог</h2>
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+                <div class="blog-card">
+                    <img src="../public/build/assets/site/img/featur-1.jpg" alt="Коли садити лохину">
+                    <div class="card-body">
+                        <span class="tag">Поради</span>
+                        <h5><a href="blog.html">Коли і як правильно садити лохину</a></h5>
+                    </div>
+                    <div class="card-footer">12.04.2025</div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="blog-card">
+                    <img src="../public/build/assets/site/img/featur-2.jpg" alt="Догляд за малиною">
+                    <div class="card-body">
+                        <span class="tag">Догляд</span>
+                        <h5><a href="blog.html">Догляд за малиною ремонтантною у відкритому ґрунті</a></h5>
+                    </div>
+                    <div class="card-footer">28.03.2025</div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                <div class="blog-card">
+                    <img src="../public/build/assets/site/img/featur-3.jpg" alt="In vitro">
+                    <div class="card-body">
+                        <span class="tag">Технологія</span>
+                        <h5><a href="blog.html">Що таке мікроклональне розмноження in vitro?</a></h5>
+                    </div>
+                    <div class="card-footer">15.03.2025</div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="blog-card">
+                    <img src="../public/build/assets/site/img/in-vitro-1.jpg" alt="Посадковий календар">
+                    <div class="card-body">
+                        <span class="tag">Календар</span>
+                        <h5><a href="blog.html">Посадковий календар на 2025 рік</a></h5>
+                    </div>
+                    <div class="card-footer">01.03.2025</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="blog.html" class="btn-outline-green"><i class="fas fa-newspaper"></i> Всі статті</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" style="background:#fafbfc;">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Часті запитання</h2>
+        <div class="faq-wrapper" data-aos="fade-up">
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Як правильно посадити лохину?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Лохину слід садити навесні або восени у кислий ґрунт (pH 4.5–5.5).
+                    Яма 50×50 см, заповнена сумішшю торфу та піску. Відстань між кущами — 1.5–2 м.
+                    Після посадки замульчуйте кору хвойних або тирсою.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Які терміни доставки саджанців?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Доставка Новою Поштою займає 1–3 робочих дні. Замовлення відправляємо щодня.
+                    При замовленні до 14:00 — відправка того ж дня.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Чим саджанці in vitro кращі за звичайні?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Рослини in vitro вирощені в стерильних умовах — вони повністю позбавлені вірусів,
+                    грибків та бактерій. Це забезпечує вищу врожайність, краще зростання та більш
+                    тривале продуктивне життя рослини.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Чи є знижки на оптові замовлення?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Так! При замовленні від 50 шт. однієї культури надається знижка.
+                    Зверніться до менеджера для уточнення умов оптового продажу.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Як зберігати саджанці до посадки?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Якщо ви не встигаєте посадити одразу — зберігайте саджанці в прохолодному (від +2 до +8°C)
+                    темному місці. Корені тримайте злегка вологими. Не допускайте підмерзання або пересихання.
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center mt-4" data-aos="fade-up">
+            <a href="faq.html" class="btn-berry"><i class="fas fa-info-circle"></i> Більше запитань</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer pt-5">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mb-4">
+            <div>
+                <h3 class="text-white mb-0">Berry-Farm</h3>
+                <p class="mb-0" style="color:var(--berry-green);">Розсадник саджанців · Безкоштовна консультація</p>
+            </div>
+            <div class="d-flex gap-2 mt-3 mt-md-0">
+                <a href="https://www.instagram.com/berryfarm_ukraine/" class="social-btn" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/berryfarmUkraine" class="social-btn" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="row g-5 pb-5">
+            <div class="col-lg-3 col-md-6">
+                <h4>Про компанію</h4>
+                <p>Назва: <span class="text-white">ФГ «Berry-Farm»</span></p>
+                <p>Рік заснування: <span class="text-white">2015</span></p>
+                <p>Форма: <span class="text-white">Фермерське господарство</span></p>
+                <p>ЄДРПОУ: <span class="text-white">44123456</span></p>
+                <a href="aboutus.html" style="color:var(--berry-green); border-bottom:1px solid var(--berry-green);">Читати більше</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Інформація</h4>
+                <a href="aboutus.html">Про нас</a>
+                <a href="contacts.html">Контакти</a>
+                <a href="privacy.html">Політика конфіденційності</a>
+                <a href="#">Умови використання</a>
+                <a href="faq.html">Питання та відповіді</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Каталог</h4>
+                <a href="catalog.html">Лохина</a>
+                <a href="catalog.html">Полуниця</a>
+                <a href="catalog.html">Малина</a>
+                <a href="catalog.html">Ожина</a>
+                <a href="catalog.html">Смородина</a>
+                <a href="catalog.html">Гортензія</a>
+                <a href="catalog.html">Фундук</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Контакти</h4>
+                <p><i class="fas fa-map-marker-alt me-2" style="color:var(--berry-green);"></i> м. Вінниця, вул. Зарічанська 10</p>
+                <p><i class="fas fa-envelope me-2" style="color:var(--berry-green);"></i> info@berry-farm.com</p>
+                <p><i class="fas fa-phone me-2" style="color:var(--berry-green);"></i> +38 (067) 555-55-55</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="copyright">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <span><i class="fas fa-copyright me-1"></i> Berry-Farm, всі права захищені.</span>
+        <span><img src="../public/build/assets/site/img/payment.png" alt="Оплата" style="height:22px;opacity:.65;margin-right:10px;vertical-align:middle"> Розроблено <a href="#">Dmytro Matviyuk</a></span>
+    </div>
+</div>
+
+<!-- Back to top -->
+<button id="back-to-top" aria-label="Вгору"><i class="fas fa-arrow-up"></i></button>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+    // Spinner
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('spinner').classList.add('hidden'), 300);
+    });
+
+    // AOS
+    AOS.init({ once: true, duration: 600, offset: 60 });
+
+    // Owl Carousel — Testimonials
+    $(function () {
+        $('.testimonial-carousel').owlCarousel({
+            loop: true,
+            margin: 20,
+            autoplay: true,
+            autoplayTimeout: 4500,
+            autoplayHoverPause: true,
+            dots: true,
+            nav: false,
+            responsive: {
+                0:    { items: 1 },
+                576:  { items: 1 },
+                768:  { items: 2 },
+                1200: { items: 3 }
+            }
+        });
+    });
+
+    // Back to top
+    const btn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 400));
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // FAQ toggle
+    function toggleFaq(el) {
+        const answer = el.nextElementSibling;
+        const isOpen = el.classList.contains('open');
+        document.querySelectorAll('.faq-question.open').forEach(q => {
+            q.classList.remove('open');
+            q.nextElementSibling.classList.remove('open');
+        });
+        if (!isOpen) {
+            el.classList.add('open');
+            answer.classList.add('open');
+        }
+    }
+
+    // Add to cart (static demo)
+    document.querySelectorAll('.btn-add-cart').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const badge = document.querySelectorAll('.cart-badge');
+            badge.forEach(b => {
+                let count = parseInt(b.textContent) || 0;
+                b.textContent = count + 1;
+            });
+            this.innerHTML = '<i class="fas fa-check me-1"></i> Додано!';
+            this.style.background = '#28a745';
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-shopping-bag me-1"></i> До кошика';
+                this.style.background = '';
+            }, 1500);
+        });
+    });
+</script>
+</body>
+</html>
