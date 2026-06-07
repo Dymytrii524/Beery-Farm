@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshSeeds - Саджанці ягід та квітів</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex: 1;
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            top: -5px;
+            right: -5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .offer-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .offer-content {
+            padding: 1.5rem;
+        }
+
+        .offer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .offer-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .offer-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .discount-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .benefits {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .benefit-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h3 {
+            font-size: 18px;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-text p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .about {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 300px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .delivery-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .delivery-info h3 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        .delivery-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .delivery-step {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-stars {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+            text-align: center;
+            color: #bbb;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Floating Boxes */
+        .floating-box {
+            position: fixed;
+            width: 280px;
+            height: 300px;
+            background: transparent;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 50;
+            animation: levitate 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .floating-box:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-box-left {
+            left: 20px;
+            bottom: 20%;
+            animation-delay: 0s;
+        }
+
+        .floating-box-right {
+            right: 20px;
+            bottom: 20%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes levitate {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .floating-box:hover {
+            animation: none;
+        }
+
+        .box-icon {
+            font-size: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .box-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .box-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .box-offer {
+            display: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .floating-box:hover .box-offer {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Side Panel - Cart */
+        .side-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-panel.open {
+            right: 0;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .panel-header h2 {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .panel-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 14px;
+        }
+
+        .cart-item-price {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 12px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        .panel-footer {
+            border-top: 1px solid #eee;
+            padding: 1.5rem;
+            background: #f8f9fa;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .min-order {
+            font-size: 12px;
+            color: #f39c12;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: #fff3cd;
+            border-radius: 4px;
+        }
+
+        .panel-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .panel-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .continue-shopping {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .continue-shopping:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .checkout-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .checkout-btn:hover {
+            background: #229954;
+        }
+
+        .panel-overlay {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .panel-overlay.open {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 200px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .side-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .floating-box {
+                width: 200px;
+                height: 240px;
+                padding: 1rem;
+            }
+
+            .floating-box-left {
+                left: 10px;
+            }
+
+            .floating-box-right {
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">🌿 FreshSeeds</div>
+            <ul class="nav-links">
+                <li><a href="#catalog">Каталог</a></li>
+                <li><a href="#about">Про нас</a></li>
+                <li><a href="#">Акції</a></li>
+                <li><a href="#">Блог</a></li>
+                <li><a href="#">Лабораторія</a></li>
+                <li><a href="#contact">Контакти</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn" onclick="toggleCart()">
+                    🛒
+                    <span class="cart-count" id="cartCount">3</span>
+                </button>
+                <button class="icon-btn" onclick="openLoginModal()">👤</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🌱 Спеціальна пропозиція цього сезону</div>
+            <h1>Чудовий сад з гарантованими здоровими саджанцями</h1>
+            <p>In Vitro саджанці – 100% без вірусів, гарантований сорт і приживання</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})">
+                    Переглянути каталог
+                </button>
+                <button class="btn btn-secondary" onclick="openContactModal()">
+                    Замовити консультацію
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Boxes -->
+    <div class="floating-box floating-box-left">
+        <div class="box-icon">📦</div>
+        <div class="box-title">Хочете знижку?</div>
+        <div class="box-text">Спеціальна пропозиція для вас</div>
+        <div class="box-offer">
+            <div style="font-size: 28px; font-weight: bold;">-10%</div>
+            <div style="font-size: 12px; margin-top: 0.5rem;">На першe перевезення</div>
+        </div>
+    </div>
+
+    <div class="floating-box floating-box-right">
+        <div class="box-icon">📦</div>
+        <div class="box-title">Поради агронома</div>
+        <div class="box-text">Експертна допомога при виборі</div>
+        <div class="box-offer">
+            <div style="font-size: 28px; font-weight: bold;">-10%</div>
+            <div style="font-size: 12px; margin-top: 0.5rem;">На першe перевезення</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Top Offers -->
+        <section class="section" id="catalog">
+            <h2 class="section-title">🌟 ТОП пропозиції</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="offer-image">🫐</div>
+                    <div class="offer-content">
+                        <div class="offer-title">Лохина 2-річна Торо</div>
+                        <div class="offer-desc">Великоплідна, морозостійка, добре приймається</div>
+                        <div class="offer-footer">
+                            <span class="price">130 грн</span>
+                            <span class="discount-badge">Хіт продаж</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="offer-image">🌹</div>
+                    <div class="offer-content">
+                        <div class="offer-title">Троянда чайно-гібридна</div>
+                        <div class="offer-desc">Едді Мітчел - червоні квіти, прекрасний аромат</div>
+                        <div class="offer-footer">
+                            <span class="price">85 грн</span>
+                            <span class="discount-badge">-20% знижка</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="offer-image">🌺</div>
+                    <div class="offer-content">
+                        <div class="offer-title">Гортензія 1-річна</div>
+                        <div class="offer-desc">Альпенглюхен - змінює колір при формуванні</div>
+                        <div class="offer-footer">
+                            <span class="price">150 грн</span>
+                            <span class="discount-badge">Нова колекція</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offer-card">
+                    <div class="offer-image">💜</div>
+                    <div class="offer-content">
+                        <div class="offer-title">Лаванда середземноморська</div>
+                        <div class="offer-desc">Ароматна, привабливе цвітіння, улюблена бджолами</div>
+                        <div class="offer-footer">
+                            <span class="price">60 грн</span>
+                            <span class="discount-badge">+2 шт = скидка</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="section">
+            <h2 class="section-title">📦 Категорії продукції</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="alert('Перейти до розділу Ягідні саджанці')">
+                    <div class="category-icon">🫐</div>
+                    <div class="category-title">Плодово-ягідні</div>
+                    <div class="category-count">24 найменування</div>
+                </div>
+
+                <div class="category-card" onclick="alert('Перейти до розділу Декоративні квіти')">
+                    <div class="category-icon">🌷</div>
+                    <div class="category-title">Декоративні квіти</div>
+                    <div class="category-count">18 найменування</div>
+                </div>
+
+                <div class="category-card" onclick="alert('Перейти до розділу Дерева')">
+                    <div class="category-icon">🌳</div>
+                    <div class="category-title">Плодові дерева</div>
+                    <div class="category-count">12 найменування</div>
+                </div>
+
+                <div class="category-card" onclick="alert('Перейти до розділу Добрива')">
+                    <div class="category-icon">🌿</div>
+                    <div class="category-title">Добрива й засоби</div>
+                    <div class="category-count">15 найменування</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="benefits section">
+            <h2 class="section-title" style="color: white;">✨ Чому вибирають нас?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔬</div>
+                    <div class="benefit-text">
+                        <h3>Лабораторне розмноження</h3>
+                        <p>Метод in-vitro забезпечує 100% збереження сортових ознак</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-text">
+                        <h3>Швидкий розвиток</h3>
+                        <p>Саджанці розвиваються швидше в першому сезоні</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚚</div>
+                    <div class="benefit-text">
+                        <h3>Доставка по Україні</h3>
+                        <p>Кур'єр, транспортні компанії, самовивіз</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✅</div>
+                    <div class="benefit-text">
+                        <h3>Гарантія якості</h3>
+                        <p>100% гарантія на сорт та приживання</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="about section" id="about">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Про нас</h2>
+                    <p><strong>FreshSeeds</strong> - розплідник сучасних саджанців з передовими технологіями.</p>
+                    <p>Ми розпочали роботу у 2020 році з простої ідеї: забезпечити садівників здоровими саджанцями без вірусів.</p>
+                    <p>Сьогодні виготовляємо понад 50 сортів ягід, квітів та декоративних рослин з 98% успіхом приживання.</p>
+                    <button class="btn btn-primary" onclick="openContactModal()">Зв'язатися з нами</button>
+                </div>
+                <div class="about-image">🌼</div>
+            </div>
+        </section>
+
+        <!-- Delivery -->
+        <section class="section" id="delivery">
+            <h2 class="section-title">📍 Як замовити?</h2>
+            <div class="delivery-info">
+                <h3>5 кроків до вашого саду</h3>
+                <div class="delivery-steps">
+                    <div class="delivery-step">
+                        <div class="step-number">1</div>
+                        <p><strong>Виберіть</strong> саджанці</p>
+                    </div>
+                    <div class="delivery-step">
+                        <div class="step-number">2</div>
+                        <p><strong>Оформіть</strong> замовлення</p>
+                    </div>
+                    <div class="delivery-step">
+                        <div class="step-number">3</div>
+                        <p><strong>Оплатіть</strong> способом</p>
+                    </div>
+                    <div class="delivery-step">
+                        <div class="step-number">4</div>
+                        <p><strong>Очікуйте</strong> доставку</p>
+                    </div>
+                    <div class="delivery-step">
+                        <div class="step-number">5</div>
+                        <p><strong>Посадіть</strong> саджанці</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section">
+            <h2 class="section-title">⭐ Відгуки клієнтів</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">"Саджанці прижилися чудово! Уже у другому місяці дали урожай. Дякую!"</div>
+                    <div class="testimonial-author">— Олена К., Київ</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">"Якісний вибір саджанців. Швидка доставка. Вже третій раз замовляю!"</div>
+                    <div class="testimonial-author">— Іван П., Львів</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">"Гортензія розквітла на першому місяці! Рекомендую всім!"</div>
+                    <div class="testimonial-author">— Катерина М., Харків</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>🌿 FreshSeeds</h4>
+                <p>Розплідник сучасних саджанців з гарантованою якістю</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Розділи</h4>
+                <ul>
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#about">Про нас</a></li>
+                    <li><a href="#">Акції</a></li>
+                    <li><a href="#">Блог</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Інформація</h4>
+                <ul>
+                    <li><a href="#">Лабораторія In-Vitro</a></li>
+                    <li><a href="#">Доставка</a></li>
+                    <li><a href="#">Гарантія</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Контакти</h4>
+                <p>☎️ +38 (050) 447-22-03</p>
+                <p>📧 info@freshseeds.ua</p>
+                <p>📍 Волинська обл., с. Рівне</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 FreshSeeds. Усі права захищені.</p>
+        </div>
+    </footer>
+
+    <!-- Panel Overlay -->
+    <div class="panel-overlay" id="panelOverlay" onclick="toggleCart()"></div>
+
+    <!-- Cart Side Panel -->
+    <div class="side-panel" id="cartPanel">
+        <div class="panel-header">
+            <h2>Кошик</h2>
+            <button class="panel-close" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="panel-content" id="cartContent">
+            <div class="cart-item">
+                <div class="cart-item-image">🫐</div>
+                <div class="cart-item-info">
+                    <div class="cart-item-title">Лохина Торо 2-річна</div>
+                    <div class="cart-item-price">130 грн</div>
+                    <div class="cart-item-qty">Кількість: 1 шт</div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <div class="cart-item-image">🌹</div>
+                <div class="cart-item-info">
+                    <div class="cart-item-title">Троянда Едді Мітчел</div>
+                    <div class="cart-item-price">85 грн</div>
+                    <div class="cart-item-qty">Кількість: 1 шт</div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <div class="cart-item-image">🌺</div>
+                <div class="cart-item-info">
+                    <div class="cart-item-title">Гортензія Альпенглюхен</div>
+                    <div class="cart-item-price">150 грн</div>
+                    <div class="cart-item-qty">Кількість: 1 шт</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="cart-total">
+                <span>До сплати:</span>
+                <span>365 грн</span>
+            </div>
+            <div class="min-order">
+                ⚠️ Мінімальна сума замовлення - 250 грн
+            </div>
+            <div class="panel-buttons">
+                <button class="continue-shopping" onclick="toggleCart()">Продовжити покупки</button>
+                <button class="checkout-btn">Оформити замовлення</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" style="display:none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <div style="background-color: white; margin: 5% auto; padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+            <span style="color: #999; float: right; font-size: 28px; font-weight: bold; cursor: pointer;" onclick="closeContactModal()">&times;</span>
+            <h2 style="margin-bottom: 1.5rem;">Зв'яжіться з нами</h2>
+            
+            <form onsubmit="handleSubmit(event)">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50;">Ваше ім'я</label>
+                    <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50;">Телефон</label>
+                    <input type="tel" name="phone" placeholder="+38 (0__) ___-__-__" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+                </div>
+
+                <button type="submit" style="width: 100%; padding: 12px; background: #667eea; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                    Відправити запит
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleCart() {
+            const panel = document.getElementById('cartPanel');
+            const overlay = document.getElementById('panelOverlay');
+            panel.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
+        function openLoginModal() {
+            alert('Вхід в особистий кабінет\n\n+380504472203 - отримати код');
+        }
+
+        function openContactModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = event.target.name.value;
+            const phone = event.target.phone.value;
+            alert(`Спасибі, ${name}! Ми зв'яжемось за номером ${phone} протягом години.`);
+            closeContactModal();
+            event.target.reset();
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
